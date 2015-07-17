@@ -1,0 +1,49 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo</title>
+  <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%#= csrf_meta_tags %>
+  <script>
+      function loadXMLDoc()
+      {
+          var xmlhttp;
+          if (window.XMLHttpRequest)
+          {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+          }
+          else
+          {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.onreadystatechange=function()
+          {
+              if (xmlhttp.readyState==4 && xmlhttp.status==200)
+              {
+                  document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+              }
+          }
+          //xmlhttp.open("GET","https://developer.motorolasolutions.com/welcome",true);
+          xmlhttp.open("GET","http://localhost:4000/posts",true);
+
+          //xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+          xmlhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+          xmlhttp.setRequestHeader("X-Frame-Options","*");
+
+          xmlhttp.send("fname=Henry&lname=Ford");
+
+          //xmlhttp.send("fname=Henry&lname=Ford");
+      }
+  </script>
+</head>
+<body>
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+<button type="button" onclick="loadXMLDoc()">Change Content</button>
+
+
+</body>
+</html>
+
